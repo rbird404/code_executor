@@ -1,0 +1,2 @@
+class CppCompileError(Exception):
+    pass
