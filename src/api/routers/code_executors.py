@@ -15,7 +15,7 @@ async def execute_code(
         execute_data: ExecuteCodeRequest,
 ):
     run_code_result = ExecutorService(
-        code=execute_data.code, language=execute_data.language
+        code=execute_data.code, language=execute_data.language, input_data=execute_data.input
     ).start_test()
 
     return run_code_result
