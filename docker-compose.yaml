@@ -1,11 +1,13 @@
 version: "3.9"
 
-name: my-microservices
+name: hackathon
 services:
   code-executor:
     build: .
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
+    volumes:
+      - ./static:/static
     restart: always
     env_file:
       - .env

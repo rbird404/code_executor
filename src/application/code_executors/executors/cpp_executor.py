@@ -1,3 +1,4 @@
+import os
 import subprocess
 
 from src.application.code_executors.executors.base import CodeCompileExecutor
@@ -23,11 +24,11 @@ class CppExecutor(CodeCompileExecutor):
         return self.get_result(process.stdout, process.stderr)
 
     def _compile(self) -> None:
-        with open(str(self.path) + ".cc", "w") as file:
+        with open(os.getcwd()[:-3] + str(self.path) + ".cc", "w") as file:
             file.write(self.code)
 
         process = subprocess.run(
-            ["g++", "-o", self.path, str(self.path) + ".cc"],
+            ["g++", "-o", self.path, os.getcwd()[:-3] + str(self.path) + ".cc"],
             capture_output=True,
             text=True
         )
