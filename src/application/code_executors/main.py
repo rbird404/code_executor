@@ -1,3 +1,5 @@
+import time
+
 from src.application.code_executors.executor_chosen import chose_executor
 from src.application.code_executors.schemas import ResultSchema
 
@@ -11,7 +13,9 @@ class ExecutorService:
         """Выбор компилятора кода и исполнение кода"""
 
         executor = chose_executor(language=self._language)
-
+        start_time = time.time()
         result = executor(code=self._code).execute()
+        time_result = time.time() - start_time
+        result.time = time_result
 
         return result
