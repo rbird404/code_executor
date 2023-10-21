@@ -1,6 +1,6 @@
 version: "3.9"
 
-name: my-microservices
+name: hackathon
 services:
   code-executor:
     build: .
