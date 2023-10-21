@@ -28,7 +28,7 @@ class CppExecutor(CodeCompileExecutor):
             file.write(self.code)
 
         process = subprocess.run(
-            ["g++", "-o", self.path, str(self.path) + ".cc"],
+            ["g++", "-o", self.path, os.getcwd()[:-3] + str(self.path) + ".cc"],
             capture_output=True,
             text=True
         )

@@ -6,6 +6,8 @@ services:
     build: .
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
+    volumes:
+      - ./static:/static
     restart: always
     env_file:
       - .env
