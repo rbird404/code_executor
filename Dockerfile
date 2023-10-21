@@ -1,18 +1,25 @@
-# FROM python:3.10
-
-# ENV DEBIAN_FRONTEND=noninteractive
-
 FROM ubuntu:latest
 
-RUN apt-get update && apt-get install -y --no-install-recommends default-jre default-jdk
+COPY src ./src
+COPY .env .
+COPY poetry.lock .
+COPY pyproject.toml .
+
+RUN apt-get update  \
+    && apt-get install -y --no-install-recommends default-jre default-jdk
 RUN javac -version
 
-RUN apt-get install python3 -y
-RUN apt-get install python3-pip -y
-
-
-RUN apt-get install golang -y 
+RUN apt-get install python3 -y  \
+    && apt-get install python3-pip -y  \
+    && apt-get install -y uvicorn
+RUN apt install python-is-python3
+RUN apt-get install golang -y
 RUN go version
 
-COPY . .
+RUN pip install poetry
+RUN poetry config virtualenvs.create false  \
+    && poetry install
 
+EXPOSE 9000
+
+CMD ["python3", "-O", "-m", "src"]
