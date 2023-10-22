@@ -11,8 +11,6 @@ export PG_STORAGE_PORT=5432
 export PG_STORAGE_USERNAME=postgres
 export PG_STORAGE_PASSWORD=postgres
 export PG_STORAGE_DATABASE=postgres
-
-export JWT_PUBLIC_KEY=
 ```
 
 ```shell
