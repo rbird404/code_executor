@@ -1,10 +1,9 @@
 FROM ubuntu:latest
 
 COPY src ./src
-COPY .env .
-COPY poetry.lock .
-COPY pyproject.toml .
-RUN mkdir static
+COPY ./pyproject.toml /pyproject.toml
+COPY ./poetry.lock /poetry.lock
+
 RUN apt-get update  \
     && apt-get install -y --no-install-recommends default-jre default-jdk
 RUN javac -version
@@ -19,7 +18,8 @@ RUN go version
 RUN pip install poetry
 RUN poetry config virtualenvs.create false  \
     && poetry install
+
+RUN mkdir -p /static
 RUN chmod 777 -R /static
-EXPOSE 9000
 
 CMD ["python3", "-O", "-m", "src"]

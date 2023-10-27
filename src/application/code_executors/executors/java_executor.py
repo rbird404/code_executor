@@ -1,4 +1,3 @@
-import os
 import subprocess
 
 from src.application.code_executors.executors.base import CodeCompileExecutor
@@ -15,14 +14,14 @@ class JavaExecutor(CodeCompileExecutor):
         self._path = STATIC / self._code_id
 
     def _write_code_to_file(self):
-        with open(os.getcwd()[:-3] + str(self.path) + ".java", 'w') as file:
+        with open(str(self.path) + ".java", 'w') as file:
             file.write(self.code)
 
     def execute(self, input_data: str | None = None) -> ResultSchema:
         self._write_code_to_file()
-        subprocess.check_call(['javac', os.getcwd()[:-3] + str(self.path) + ".java"])
+        subprocess.check_call(['javac', str(self.path) + ".java"])
         process = subprocess.run(
-            ['java', os.getcwd()[:-3] + str(self.path) + ".java"],
+            ['java', str(self.path) + ".java"],
             input=input_data,
             capture_output=True,
             text=True,

@@ -1,13 +1,13 @@
 version: "3.9"
-
 name: hackathon
+
 services:
   code-executor:
     build: .
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     volumes:
-      - ./static:/static
+      - static:/static:mode=777
     restart: always
     env_file:
       - .env
@@ -17,3 +17,6 @@ services:
 networks:
   my-ms:
     driver: bridge
+
+volumes:
+  static:

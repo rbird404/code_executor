@@ -1,3 +1,3 @@
 from pathlib import Path
 
-STATIC = Path("static")
+STATIC = Path(__file__).parent.parent.parent / "static"
